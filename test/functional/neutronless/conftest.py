@@ -125,6 +125,7 @@ class TestConfig(object):
         config['icontrol_hostname'] = pytest.symbols.bigip_floating_ips[0]
         config['icontrol_username'] = pytest.symbols.bigip_username
         config['icontrol_password'] = pytest.symbols.bigip_password
+        config['report_esd_names_in_agent'] = False
         ENV_PREFIX = config['environment_prefix']
         FOLDER = '{0}_{1}'.format(ENV_PREFIX, self.TENANT_ID)
         return ENV_PREFIX, FOLDER, config

@@ -1,0 +1,136 @@
+commit b6778b1a11e845a0763f6b7e05cc5d96da58c312
+Author: jxie <j.xie@f5.com>
+Date:   Tue Jan 29 10:17:48 2019 +0800
+
+    add default values in functional tests
+    
+    unlegacy_setting_placeholder and report_esd_names_in_agent
+
+diff --git a/test/functional/config/basic_agent_config.json b/test/functional/config/basic_agent_config.json
+index ac11613..d57dfcc 100644
+--- a/test/functional/config/basic_agent_config.json
++++ b/test/functional/config/basic_agent_config.json
+@@ -69,7 +69,9 @@
+         "icontrol_hostname": "DEVICE_IP",
+         "icontrol_password": "admin", 
+         "icontrol_username": "admin", 
+-        "icontrol_vcmp_hostname": null, 
++	"report_esd_names_in_agent": false,
++	"unlegacy_setting_placeholder": null,
++        "icontrol_vcmp_hostname": null,
+         "instance_format": "[instance: %(uuid)s] ", 
+         "instance_uuid_format": "[instance: %(uuid)s] ", 
+         "interface_port_static_mappings": null, 
+diff --git a/test/functional/config/overcloud_basic_agent_config.json b/test/functional/config/overcloud_basic_agent_config.json
+index 86cd6c1..750a95a 100644
+--- a/test/functional/config/overcloud_basic_agent_config.json
++++ b/test/functional/config/overcloud_basic_agent_config.json
+@@ -69,6 +69,8 @@
+         "icontrol_hostname": "DEVICE_IP",
+         "icontrol_password": "admin", 
+         "icontrol_username": "admin", 
++	"report_esd_names_in_agent": false,
++	"unlegacy_setting_placeholder": null,
+         "icontrol_vcmp_hostname": null, 
+         "instance_format": "[instance: %(uuid)s] ", 
+         "instance_uuid_format": "[instance: %(uuid)s] ", 
+diff --git a/test/functional/neutronless/conftest.py b/test/functional/neutronless/conftest.py
+index a3b761e..ecf0e5c 100644
+--- a/test/functional/neutronless/conftest.py
++++ b/test/functional/neutronless/conftest.py
+@@ -125,6 +125,8 @@ class TestConfig(object):
+         config['icontrol_hostname'] = pytest.symbols.bigip_floating_ips[0]
+         config['icontrol_username'] = pytest.symbols.bigip_username
+         config['icontrol_password'] = pytest.symbols.bigip_password
++        config['report_esd_names_in_agent'] = False
++	config['unlegacy_setting_placeholder'] = None
+         ENV_PREFIX = config['environment_prefix']
+         FOLDER = '{0}_{1}'.format(ENV_PREFIX, self.TENANT_ID)
+         return ENV_PREFIX, FOLDER, config
+@@ -458,6 +460,8 @@ def icd_config():
+     config['icontrol_hostname'] = pytest.symbols.bigip_floating_ips[0]
+     config['icontrol_username'] = pytest.symbols.bigip_username
+     config['icontrol_password'] = pytest.symbols.bigip_password
++    config['report_esd_names_in_agent'] = False
++    config['unlegacy_setting_placeholder'] = None
+     try:
+         config['f5_vtep_selfip_name'] = pytest.symbols.f5_vtep_selfip_name
+     except AttributeError:
+diff --git a/test/functional/neutronless/disconnected_service/conf_symbols.json b/test/functional/neutronless/disconnected_service/conf_symbols.json
+index bac3529..7b565bf 100644
+--- a/test/functional/neutronless/disconnected_service/conf_symbols.json
++++ b/test/functional/neutronless/disconnected_service/conf_symbols.json
+@@ -9,6 +9,8 @@
+   "icontrol_hostname":                            "DEVICE_IP",
+   "icontrol_username":                            "admin",
+   "icontrol_password":                            "admin",
++  "report_esd_names_in_agent":                    false,
++  "unlegacy_setting_placeholder":                 null,
+   "f5_device_type":                               "external",
+   "f5_ha_type":                                   "standalone",
+   "f5_global_routed_mode":                        false,
+diff --git a/test/functional/neutronless/disconnected_service/oslo_confs.json b/test/functional/neutronless/disconnected_service/oslo_confs.json
+index 9964c80..bbde13f 100644
+--- a/test/functional/neutronless/disconnected_service/oslo_confs.json
++++ b/test/functional/neutronless/disconnected_service/oslo_confs.json
+@@ -445,6 +445,8 @@
+         "icontrol_hostname": "DEVICE_IP",
+         "icontrol_password": "admin", 
+         "icontrol_username": "admin", 
++	"report_esd_names_in_agent": false,
++	"unlegacy_setting_placeholder": null,
+         "icontrol_vcmp_hostname": null, 
+         "instance_format": "[instance: %(uuid)s] ", 
+         "instance_uuid_format": "[instance: %(uuid)s] ", 
+diff --git a/test/functional/neutronless/esd/test_esd_pools.py b/test/functional/neutronless/esd/test_esd_pools.py
+index 5ebc481..bc0779e 100644
+--- a/test/functional/neutronless/esd/test_esd_pools.py
++++ b/test/functional/neutronless/esd/test_esd_pools.py
+@@ -84,6 +84,8 @@ def icd_config():
+     config['icontrol_hostname'] = pytest.symbols.bigip_floating_ips[0]
+     config['icontrol_username'] = pytest.symbols.bigip_username
+     config['icontrol_password'] = pytest.symbols.bigip_password
++    config['report_esd_names_in_agent'] = False
++    config['unlegacy_setting_placeholder'] = None
+ 
+     return config
+ 
+diff --git a/test/functional/neutronless/loadbalancer/test_loadbalancer_rd.py b/test/functional/neutronless/loadbalancer/test_loadbalancer_rd.py
+index a749354..e6c4ce9 100644
+--- a/test/functional/neutronless/loadbalancer/test_loadbalancer_rd.py
++++ b/test/functional/neutronless/loadbalancer/test_loadbalancer_rd.py
+@@ -52,6 +52,8 @@ def icd_config():
+     config['icontrol_hostname'] = pytest.symbols.bigip_floating_ips[0]
+     config['icontrol_username'] = pytest.symbols.bigip_username
+     config['icontrol_password'] = pytest.symbols.bigip_password
++    config['report_esd_names_in_agent'] = false
++    config['unlegacy_setting_placeholder'] = None
+     #config['f5_vtep_selfip_name'] = pytest.symbols.f5_vtep_selfip_name
+ 
+     return config
+diff --git a/test/functional/neutronless/vcmp/common_service_handler_env.json b/test/functional/neutronless/vcmp/common_service_handler_env.json
+index f62588d..8aa13b1 100644
+--- a/test/functional/neutronless/vcmp/common_service_handler_env.json
++++ b/test/functional/neutronless/vcmp/common_service_handler_env.json
+@@ -9,6 +9,8 @@
+   "icontrol_vcmp_host2":                          {"host_ip": "10.190.5.186", "guest_name": "test_guest2", "guest_hostname": "local.localdomain"},
+   "icontrol_username":                            "admin",
+   "icontrol_password":                            "admin",
++  "report_esd_names_in_agent":                    false,
++  "unlegacy_setting_placeholder":                 null,
+   "f5_device_type":                               "external",
+   "f5_ha_type":                                   "standalone",
+   "f5_global_routed_mode":                        true,
+diff --git a/test/functional/neutronless/vcmp/vcmp_oslo_confs.json b/test/functional/neutronless/vcmp/vcmp_oslo_confs.json
+index bc64baf..a92e125 100644
+--- a/test/functional/neutronless/vcmp/vcmp_oslo_confs.json
++++ b/test/functional/neutronless/vcmp/vcmp_oslo_confs.json
+@@ -89,6 +89,8 @@
+         "icontrol_vcmp_hostname": "10.190.5.185",
+         "icontrol_password": "admin", 
+         "icontrol_username": "admin", 
++	"report_esd_names_in_agent": false,
++	"unlegacy_setting_placeholder": null,
+         "instance_format": "[instance: %(uuid)s] ", 
+         "instance_uuid_format": "[instance: %(uuid)s] ", 
+         "interface_port_static_mappings": null, 

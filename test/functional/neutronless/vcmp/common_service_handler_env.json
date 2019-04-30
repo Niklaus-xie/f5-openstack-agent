@@ -9,6 +9,8 @@
   "icontrol_vcmp_host2":                          {"host_ip": "10.190.5.186", "guest_name": "test_guest2", "guest_hostname": "local.localdomain"},
   "icontrol_username":                            "admin",
   "icontrol_password":                            "admin",
+  "report_esd_names_in_agent":                    false,
+  "unlegacy_setting_placeholder":                 null,
   "f5_device_type":                               "external",
   "f5_ha_type":                                   "standalone",
   "f5_global_routed_mode":                        true,

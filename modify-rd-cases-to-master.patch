@@ -1,0 +1,37 @@
+commit 887bafbc86cfc0a7dcf461296a45d844ff7db255
+Author: jxie <j.xie@f5.com>
+Date:   Wed Jan 30 16:37:50 2019 +0800
+
+    The requested rd already exists in partition test
+    
+    The original fix for rd bug brings in this issue:
+    /test/test_aux_1 already exists.
+
+diff --git a/test/functional/singlebigip/test_network.py b/test/functional/singlebigip/test_network.py
+index ba4fe0e..02f6653 100644
+--- a/test/functional/singlebigip/test_network.py
++++ b/test/functional/singlebigip/test_network.py
+@@ -221,9 +221,9 @@ class TestRouteDomain(object):
+         te = setup
+         num_route_domains = 5
+         exp_rd_ids = []
+-        for i in range(0, num_route_domains):
++        for i in range(50, 50+num_route_domains):
+             rd = network_helper.create_route_domain(te.mgmt_root,
+-                                                    te.rd_id,
++                                                    i,
+                                                     te.partition,
+                                                     is_aux=True)
+             add_resource_teardown(te.request, rd)
+@@ -239,9 +239,9 @@ class TestRouteDomain(object):
+         te = setup
+         num_route_domains = 5
+         exp_rd_names = []
+-        for i in range(0, num_route_domains):
++        for i in range(60, 60+num_route_domains):
+             rd = network_helper.create_route_domain(te.mgmt_root,
+-                                                    te.rd_id,
++                                                    i,
+                                                     te.partition,
+                                                     is_aux=True)
+             add_resource_teardown(te.request, rd)

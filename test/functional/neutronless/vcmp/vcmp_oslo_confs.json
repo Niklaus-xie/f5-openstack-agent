@@ -89,6 +89,8 @@
         "icontrol_vcmp_hostname": "10.190.5.185",
         "icontrol_password": "admin", 
         "icontrol_username": "admin", 
+	"report_esd_names_in_agent": false,
+	"unlegacy_setting_placeholder": null,
         "instance_format": "[instance: %(uuid)s] ", 
         "instance_uuid_format": "[instance: %(uuid)s] ", 
         "interface_port_static_mappings": null, 

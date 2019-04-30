@@ -91,6 +91,7 @@ def create_fdb_entry(seg_id):
         }
     }
 
+@pytest.mark.skip(reason=str("seems not done yet"))
 def test_add_remove_fdbs(bigip, icontrol_driver):
     """ Test simulating L2 pop events to add/remove fdb entries."""
 

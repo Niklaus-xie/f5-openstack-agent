@@ -52,6 +52,8 @@ def icd_config():
     config['icontrol_hostname'] = pytest.symbols.bigip_floating_ips[0]
     config['icontrol_username'] = pytest.symbols.bigip_username
     config['icontrol_password'] = pytest.symbols.bigip_password
+    config['report_esd_names_in_agent'] = false
+    config['unlegacy_setting_placeholder'] = None
     #config['f5_vtep_selfip_name'] = pytest.symbols.f5_vtep_selfip_name
 
     return config

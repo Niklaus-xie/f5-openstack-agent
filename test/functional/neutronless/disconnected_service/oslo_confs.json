@@ -445,6 +445,8 @@
         "icontrol_hostname": "DEVICE_IP",
         "icontrol_password": "admin", 
         "icontrol_username": "admin", 
+	"report_esd_names_in_agent": false,
+	"unlegacy_setting_placeholder": null,
         "icontrol_vcmp_hostname": null, 
         "instance_format": "[instance: %(uuid)s] ", 
         "instance_uuid_format": "[instance: %(uuid)s] ", 

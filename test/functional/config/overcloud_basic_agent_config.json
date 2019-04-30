@@ -52,7 +52,7 @@
         "f5_external_physical_mappings": [
             "default:1.1:true"
         ], 
-        "f5_global_routed_mode": true,
+        "f5_global_routed_mode": false,
         "f5_ha_type": "standalone", 
         "f5_parent_ssl_profile": "clientssl", 
         "f5_populate_static_arp": false, 
@@ -69,6 +69,8 @@
         "icontrol_hostname": "DEVICE_IP",
         "icontrol_password": "admin", 
         "icontrol_username": "admin", 
+	"report_esd_names_in_agent": false,
+	"unlegacy_setting_placeholder": null,
         "icontrol_vcmp_hostname": null, 
         "instance_format": "[instance: %(uuid)s] ", 
         "instance_uuid_format": "[instance: %(uuid)s] ", 

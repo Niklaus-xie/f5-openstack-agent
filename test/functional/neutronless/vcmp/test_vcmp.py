@@ -169,7 +169,7 @@ def check_host_and_guest_vlans_on_create(vcmp_host, bigip):
     assert vcmp_host['bigip'].tm.net.vlans.vlan.exists(
         name='vlan-46', partition='Common')
 
-
+@pytest.mark.skip(reason=str("vcmp seems not needed or supported yet"))
 def test_vcmp_createlb(track_bigip_cfg, setup_bigip_devices, bigip, vcmp_setup,
                        vcmp_uris):
     '''Create lb with vcmp turned on.'''
@@ -200,6 +200,7 @@ def test_vcmp_createlb(track_bigip_cfg, setup_bigip_devices, bigip, vcmp_setup,
     check_host_and_guest_vlans_on_create(vcmp_host[0], bigip)
 
 
+@pytest.mark.skip(reason=str("vcmp seems not needed or supported yet"))
 def test_vcmp_deletelb(track_bigip_cfg, setup_bigip_devices, bigip, vcmp_setup,
                        vcmp_uris):
     '''Create and delete lb with vcmp turned on.'''
@@ -234,6 +235,7 @@ def test_vcmp_deletelb(track_bigip_cfg, setup_bigip_devices, bigip, vcmp_setup,
     assert not hasattr(vcmp_host[0]['guest'], 'vlans')
 
 
+@pytest.mark.skip(reason=str("vcmp seems not needed or supported yet"))
 def test_vcmp_deletelb_with_mgmt_vlan(
         track_bigip_cfg, setup_bigip_devices, bigip, vcmp_setup, vcmp_uris,
         mgmt_vlan):
@@ -275,6 +277,7 @@ def test_vcmp_deletelb_with_mgmt_vlan(
     assert vcmp_host[0]['guest'].vlans == ['/Common/mgmt_vlan']
 
 
+@pytest.mark.skip(reason=str("vcmp seems not needed or supported yet"))
 def test_vcmp_create_listener(
         track_bigip_cfg, setup_bigip_devices, bigip, vcmp_setup, vcmp_uris):
     '''Create listener with vcmp turned on.'''
@@ -306,6 +309,7 @@ def test_vcmp_create_listener(
     check_host_and_guest_vlans_on_create(vcmp_host[0], bigip)
 
 
+@pytest.mark.skip(reason=str("vcmp seems not needed or supported yet"))
 def test_vcmp_delete_listener(
         track_bigip_cfg, setup_bigip_devices, bigip, vcmp_setup, vcmp_uris):
     '''Create and delete listener with vcmp turned on.'''
@@ -346,6 +350,7 @@ def test_vcmp_delete_listener(
     assert not hasattr(vcmp_host[0]['guest'], 'vlans')
 
 
+@pytest.mark.skip(reason=str("vcmp seems not needed or supported yet"))
 @mock.patch('f5_openstack_agent.lbaasv2.drivers.bigip.icontrol_driver.'
             'ClusterManager')
 @mock.patch('f5_openstack_agent.lbaasv2.drivers.bigip.vcmp.LOG')
@@ -452,6 +457,7 @@ def test_vcmp_clustered_guests(
             name='vlan-46', partition='Common') is False
 
 
+@pytest.mark.skip(reason=str("vcmp seems not needed or supported yet"))
 @mock.patch('f5_openstack_agent.lbaasv2.drivers.bigip.icontrol_driver.'
             'ClusterManager')
 @mock.patch('f5_openstack_agent.lbaasv2.drivers.bigip.vcmp.LOG')
@@ -482,6 +488,7 @@ def test_vcmp_clustered_guests_more_hosts_than_guests(
             pytest.symbols.bigip_ip) in ex.value.message
 
 
+@pytest.mark.skip(reason=str("vcmp seems not needed or supported yet"))
 def test_vcmp_delete_listener_flat(
         track_bigip_cfg, setup_bigip_devices, bigip, vcmp_setup, vcmp_uris):
     '''Create listener with vcmp turned on and flat as network type.'''

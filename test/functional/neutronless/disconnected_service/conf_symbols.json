@@ -9,6 +9,8 @@
   "icontrol_hostname":                            "DEVICE_IP",
   "icontrol_username":                            "admin",
   "icontrol_password":                            "admin",
+  "report_esd_names_in_agent":                    false,
+  "unlegacy_setting_placeholder":                 null,
   "f5_device_type":                               "external",
   "f5_ha_type":                                   "standalone",
   "f5_global_routed_mode":                        false,

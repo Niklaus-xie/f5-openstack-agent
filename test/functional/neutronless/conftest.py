@@ -125,6 +125,8 @@ class TestConfig(object):
         config['icontrol_hostname'] = pytest.symbols.bigip_floating_ips[0]
         config['icontrol_username'] = pytest.symbols.bigip_username
         config['icontrol_password'] = pytest.symbols.bigip_password
+        config['report_esd_names_in_agent'] = False
+	config['unlegacy_setting_placeholder'] = None
         ENV_PREFIX = config['environment_prefix']
         FOLDER = '{0}_{1}'.format(ENV_PREFIX, self.TENANT_ID)
         return ENV_PREFIX, FOLDER, config
@@ -458,6 +460,8 @@ def icd_config():
     config['icontrol_hostname'] = pytest.symbols.bigip_floating_ips[0]
     config['icontrol_username'] = pytest.symbols.bigip_username
     config['icontrol_password'] = pytest.symbols.bigip_password
+    config['report_esd_names_in_agent'] = False
+    config['unlegacy_setting_placeholder'] = None
     try:
         config['f5_vtep_selfip_name'] = pytest.symbols.f5_vtep_selfip_name
     except AttributeError:

@@ -87,6 +87,7 @@ def icontrol_driver(icd_config, fake_plugin_rpc):
     return icd
 
 
+@pytest.mark.skip(reason=str("seems not done yet"))
 def test_tenant(track_bigip_cfg, bigip, services, icd_config,
                  icontrol_driver):
     """Test creating and deleting SNAT pools with common network listener.

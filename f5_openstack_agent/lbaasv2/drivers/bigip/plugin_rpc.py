@@ -713,3 +713,20 @@ class LBaaSv2PluginRPC(object):
                       "validate_l7policys_state_by_listener")
 
         return l7policy_status
+
+    @log_helpers.log_method_call
+    def get_member_network(self, network_id):
+        """Get network."""
+        network = None
+        try:
+            network = self._call(
+                self.context,
+                self._make_msg('get_member_network',
+                               network_id=network_id),
+                topic=self.topic
+            )
+        except messaging.MessageDeliveryFailure:
+            LOG.error("agent->plugin RPC exception caught: "
+                      "get_member_network")
+
+        return network

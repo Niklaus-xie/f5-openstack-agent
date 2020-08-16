@@ -193,14 +193,24 @@ class NetworkServiceBuilder(object):
                       "for %s on subnet %s." % (assure_bigip.hostname,
                                                 subnetinfo['subnet']))
 
-            # Make sure the L2 network is established
-            self.l2_service.assure_bigip_network(
-                assure_bigip, subnetinfo['network'])
-
             # Connect the BigIP device to network, by getting
             # a self-ip address on the subnet.
             self.bigip_selfip_manager.assure_bigip_selfip(
                 assure_bigip, service, subnetinfo)
+
+            if subnetinfo['network'].get('provider:network_type', None) != 'vlan':
+                LOG.debug('\nsubnetinfo network is: %s', subnetinfo['network'])
+                net_id = subnetinfo['network']['id']
+                the_net = self.driver.plugin_rpc.get_member_network(net_id)
+                LOG.debug('the_net: %s', the_net)
+                self.l2_service.assure_bigip_network(
+                    assure_bigip, the_net
+                )
+            else:
+                LOG.debug('running here')
+                self.l2_service.assure_bigip_network(
+                    assure_bigip, subnetinfo['network']
+                )
 
         # L3 Shared Config
         assure_bigips = self.driver.get_config_bigips()

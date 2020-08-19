@@ -498,6 +498,13 @@ class ServiceModelAdapter(object):
         if policies:
             self._apply_l7_and_esd_policies(listener, policies, vip)
 
+        if self.conf.adding_test_irule:
+            my_rules = vip.get('rules', [])
+            LOG.debug('adding_test_irule, my_rules here: %s', my_rules)
+            LOG.debug('add bwc irule test only')
+            my_rules.append('/Common/bwc')
+            vip['rules'] = my_rules
+            LOG.debug('adding_test_irule, my_rules here: %s', vip['rules'])
         return vip
 
     def _apply_l7_and_esd_policies(self, listener, policies, vip):

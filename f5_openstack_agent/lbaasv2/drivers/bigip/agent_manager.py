@@ -144,11 +144,6 @@ OPTS = [
         'esd_auto_refresh',
         default=True,
         help='Enable ESD file periodic refresh'
-    ),
-    cfg.BoolOpt(
-        'adding_test_irule',
-        default=False,
-        help='adding test irule for test only'
     )
 ]
 
